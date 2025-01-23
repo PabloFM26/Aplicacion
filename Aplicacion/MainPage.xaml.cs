@@ -1,24 +1,36 @@
-﻿namespace Aplicacion
-{
+﻿namespace Aplicacion;
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
-        public MainPage()
+    string translatedNumber;
+    public MainPage()
         {
             InitializeComponent();
         }
+    private void OnTranslate(object sender, EventArgs e)
+    {
+        string enteredNumber = PhoneNumberText.Text;
+        translatedNumber = Aplicacion.PhonewordTranslator.ToNumber(enteredNumber);
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        if (!string.IsNullOrEmpty(translatedNumber))
         {
-            count+= 5;
+            CallButton.IsEnabled = true;
+            CallButton.Text = "Call " + translatedNumber;
+        }
+        else
+        {
+            CallButton.IsEnabled = false;
+            CallButton.Text = "Call";
+        }
+    }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+    async void OnCall(object sender, System.EventArgs e)
+    {
+        if (await this.DisplayAlert(
+            "Dial a Number",
+            "Would you like to call " + translatedNumber + "?",
+            "Yes",
+            "No"))
+        {
         }
     }
 
