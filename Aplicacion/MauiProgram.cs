@@ -13,6 +13,8 @@ namespace Aplicacion
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Fuente1.ttf", "Fuente1");
+                    fonts.AddFont("Fuente2.otf", "Fuente2");
                 });
 
 #if DEBUG

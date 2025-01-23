@@ -14,21 +14,25 @@
         if (!string.IsNullOrEmpty(translatedNumber))
         {
             CallButton.IsEnabled = true;
-            CallButton.Text = "Call " + translatedNumber;
+            CallButton.Text = "Llamar " + translatedNumber;
+            CallButton.BackgroundColor = Colors.Red;
+            CallButton.TextColor = Colors.White;
         }
         else
         {
             CallButton.IsEnabled = false;
-            CallButton.Text = "Call";
+            CallButton.Text = "Llamar";
+            CallButton.BackgroundColor = Colors.DarkRed;
         }
     }
+
 
     async void OnCall(object sender, System.EventArgs e)
     {
         if (await this.DisplayAlert(
-            "Dial a Number",
-            "Would you like to call " + translatedNumber + "?",
-            "Yes",
+            "Llamar al número ",
+            "¿Quieres llamar al numero " + translatedNumber + "?",
+            "Si",
             "No"))
         {
             try
@@ -38,12 +42,12 @@
             }
             catch (ArgumentNullException)
             {
-                await DisplayAlert("Unable to dial", "Phone number was not valid.", "OK");
+                await DisplayAlert("No se puede llamar ", "El número de teléfono no es válido", "OK");
             }
             catch (Exception)
             {
-                // Other error has occurred.
-                await DisplayAlert("Unable to dial", "Phone dialing failed.", "OK");
+    
+                await DisplayAlert("No se puede llamar ", "Error al marcar el teléfono", "OK");
             }
         }
     }
